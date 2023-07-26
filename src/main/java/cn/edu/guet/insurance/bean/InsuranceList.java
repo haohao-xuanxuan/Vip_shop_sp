@@ -7,6 +7,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -44,6 +47,9 @@ public class InsuranceList implements Serializable {
      * 保险案件发生时间
      */
     @TableField(value = "case_occurrence_time")
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+
     private Date caseOccurrenceTime;
 
     /**
@@ -110,6 +116,10 @@ public class InsuranceList implements Serializable {
      * 赔付到账具体时间
      */
     @TableField(value = "compensation_received_time")
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+
+
     private Date compensationReceivedTime;
 
     /**
@@ -152,12 +162,20 @@ public class InsuranceList implements Serializable {
      * 创建时间
      */
     @TableField(value = "create_time")
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+
+
     private Date createTime;
 
     /**
      * 更新时间
      */
     @TableField(value = "update_time")
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+
+
     private Date updateTime;
 
     @TableField(exist = false)
