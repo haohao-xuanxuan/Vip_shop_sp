@@ -46,7 +46,7 @@ public class InsurancesController {
     @PostMapping("/updateInsurances")
     public ResponseData updateInsurances(@RequestBody InsuranceList insuranceList) {
 
-        return infoService.updateInsurances((InsuranceList) infoService);
+        return infoService.updateInsurances(insuranceList);
 
     }
 
