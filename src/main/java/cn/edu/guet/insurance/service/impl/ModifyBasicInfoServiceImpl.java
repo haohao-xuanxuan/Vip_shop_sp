@@ -1,5 +1,6 @@
 package cn.edu.guet.insurance.service.impl;
 
+
 import cn.edu.guet.insurance.bean.SearchModifyDTO;
 import cn.edu.guet.insurance.common.ResponseData;
 import cn.hutool.core.collection.CollectionUtil;
@@ -23,9 +24,12 @@ import java.util.List;
 */
 @Service
 public class ModifyBasicInfoServiceImpl extends ServiceImpl<ModifyBasicInfoMapper, ModifyBasicInfo>
-    implements ModifyBasicInfoService{
+    implements ModifyBasicInfoService {
 
-    @Autowired ModifyBasicInfoMapper modifyBasicInfoMapper;
+    @Autowired
+    ModifyBasicInfoMapper modifyBasicInfoMapper;
+
+
 
     @Override
     public IPage searchModify(SearchModifyDTO searchModifyDTO) {
@@ -39,19 +43,32 @@ public class ModifyBasicInfoServiceImpl extends ServiceImpl<ModifyBasicInfoMappe
         if (searchModifyDTO.getCounty() != 0) {
             qw.eq("county", searchModifyDTO.getCounty());
         }
-        if (!StringUtils.isBlank(searchModifyDTO.getModifyProjectName())){
+        if (!StringUtils.isBlank(searchModifyDTO.getModifyProjectName())) {
             qw.like("modify_project_name", searchModifyDTO.getModifyProjectName());
         }
-        if (CollectionUtil.isNotEmpty(searchModifyDTO.getOverWorkTime())){
-            qw.between("actual_completion_time",searchModifyDTO.getOverWorkTime().get(0),searchModifyDTO.getOverWorkTime().get(1));
+        if (CollectionUtil.isNotEmpty(searchModifyDTO.getOverWorkTime())) {
+            qw.between("actual_completion_time", searchModifyDTO.getOverWorkTime().get(0), searchModifyDTO.getOverWorkTime().get(1));
         }
-        IPage listResult =modifyBasicInfoMapper.selectPage(page, qw);
+        IPage listResult = modifyBasicInfoMapper.selectPage(page, qw);
 
         return listResult;
     }
 
+    @Override
+    public ResponseData addChangeReform(ModifyBasicInfo modifyBasicInfo) {
+        int insert = modifyBasicInfoMapper.insert(modifyBasicInfo);
+        System.out.println("ssssssss:" + insert);
 
+        if (insert > 0) {
+            return ResponseData.ok("保存成功");
+        } else {
+            return ResponseData.fail("保存失败");
+        }
+
+    }
 }
+
+
 
 
 
