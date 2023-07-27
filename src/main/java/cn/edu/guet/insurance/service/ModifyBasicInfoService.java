@@ -5,6 +5,7 @@ import cn.edu.guet.insurance.bean.SearchModifyDTO;
 import cn.edu.guet.insurance.common.ResponseData;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import cn.edu.guet.insurance.common.ResponseData;
 
 /**
 * @author 14594
@@ -15,6 +16,9 @@ public interface ModifyBasicInfoService extends IService<ModifyBasicInfo> {
 
     IPage searchModify(SearchModifyDTO searchModifyDTO);
 
-
-
+    ResponseData addChangeReform(ModifyBasicInfo modifyBasicInfo);
 }
+
+
+
+
