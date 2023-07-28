@@ -1,22 +1,16 @@
 package cn.edu.guet.insurance.controller;
-
 import cn.edu.guet.insurance.bean.ModifyBasicInfo;
-
 import cn.edu.guet.insurance.bean.SearchModifyDTO;
 import cn.edu.guet.insurance.common.ResponseData;
 import cn.edu.guet.insurance.service.ModifyBasicInfoService;
 import cn.edu.guet.insurance.service.PrefectureCountyService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 @RestController
 public class ModifyController {
@@ -42,5 +36,10 @@ public class ModifyController {
         return ResponseData.ok(countyList);
     }
 
+    @PostMapping("/deleteModify")
+    public ResponseData deleteModify(@RequestBody SearchModifyDTO searchModifyDTO) {
+        System.out.println(searchModifyDTO.getDeleteId().size());
+        return modifyBasicInfoService.deleteModify(searchModifyDTO.getDeleteId());
+    }
 
 }
