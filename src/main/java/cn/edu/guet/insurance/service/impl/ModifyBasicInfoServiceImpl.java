@@ -1,7 +1,9 @@
 package cn.edu.guet.insurance.service.impl;
 
+
 import cn.edu.guet.insurance.bean.SearchModifyDTO;
 import cn.edu.guet.insurance.common.ResponseData;
+import cn.edu.guet.insurance.service.ModifySummaryService;
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -14,19 +16,25 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
- * @author 14594
- * @description 针对表【modify_basic_info(modify_basic_info)】的数据库操作Service实现
- * @createDate 2023-07-23 21:50:29
- */
+* @author 14594
+* @description 针对表【modify_basic_info(modify_basic_info)】的数据库操作Service实现
+* @createDate 2023-07-23 21:50:29
+*/
 @Service
 public class ModifyBasicInfoServiceImpl extends ServiceImpl<ModifyBasicInfoMapper, ModifyBasicInfo>
-        implements ModifyBasicInfoService {
+    implements ModifyBasicInfoService {
 
     @Autowired
     ModifyBasicInfoMapper modifyBasicInfoMapper;
+
+    @Autowired
+    ModifySummaryService modifySummaryService;
 
     @Override
     public ResponseData creatmodify(ModifyBasicInfo modifyBasicInfo) {
@@ -34,6 +42,20 @@ public class ModifyBasicInfoServiceImpl extends ServiceImpl<ModifyBasicInfoMappe
         System.out.println("ssssssss:" + insert);
 
         if (insert > 0) {
+            //月份
+            Date date = modifyBasicInfo.getExpectedBeginTime();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            int month = calendar.get(Calendar.MONTH) + 1; // 注意要加1，因为月份值从0开始
+//年份
+            int year = calendar.get(Calendar.YEAR);
+
+            int prefecture = modifyBasicInfo.getPrefecture();
+//总金额
+            BigDecimal compensationAmount = modifyBasicInfo.getCompensationCosts();
+
+            modifySummaryService.updateMonthlyCountAndTotalAmount(prefecture, month,year,compensationAmount);
+
             return ResponseData.ok("保存成功");
         } else {
             return ResponseData.fail("保存失败");
@@ -48,6 +70,7 @@ public class ModifyBasicInfoServiceImpl extends ServiceImpl<ModifyBasicInfoMappe
         } else {
             return ResponseData.fail("删除失败");
         }
+
     }
 
     @Override
@@ -58,6 +81,8 @@ public class ModifyBasicInfoServiceImpl extends ServiceImpl<ModifyBasicInfoMappe
         } else {
             return ResponseData.fail("更新失败");
         }
+
+
     }
 
     @Override
@@ -83,7 +108,12 @@ public class ModifyBasicInfoServiceImpl extends ServiceImpl<ModifyBasicInfoMappe
         return listResult;
     }
 
+
+
+
+
 }
+
 
 
 
