@@ -1,6 +1,4 @@
 package cn.edu.guet.insurance.service.impl;
-
-
 import cn.edu.guet.insurance.bean.SearchModifyDTO;
 import cn.edu.guet.insurance.common.ResponseData;
 import cn.hutool.core.collection.CollectionUtil;
@@ -14,7 +12,6 @@ import cn.edu.guet.insurance.mapper.ModifyBasicInfoMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**
@@ -28,8 +25,6 @@ public class ModifyBasicInfoServiceImpl extends ServiceImpl<ModifyBasicInfoMappe
 
     @Autowired
     ModifyBasicInfoMapper modifyBasicInfoMapper;
-
-
 
     @Override
     public IPage searchModify(SearchModifyDTO searchModifyDTO) {
@@ -64,7 +59,17 @@ public class ModifyBasicInfoServiceImpl extends ServiceImpl<ModifyBasicInfoMappe
         } else {
             return ResponseData.fail("保存失败");
         }
+    }
 
+    @Override
+    public ResponseData deleteModify(List<Integer> deleteId) {
+        int delete = modifyBasicInfoMapper.deleteBatchIds(deleteId);
+        if (delete>0){
+            return ResponseData.ok("删除成功");
+        }
+        else {
+            return ResponseData.fail("删除失败");
+        }
     }
 }
 

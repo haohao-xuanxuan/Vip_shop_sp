@@ -52,7 +52,14 @@ public class SearchModifyDTO extends Page {
     private Date actualCompletionTime;
 
 
-
+    /**
+     *
+     */
     private List<String> overWorkTime;
+
+    /**
+     *
+     */
+    private List<Integer> deleteId;
 
 }
