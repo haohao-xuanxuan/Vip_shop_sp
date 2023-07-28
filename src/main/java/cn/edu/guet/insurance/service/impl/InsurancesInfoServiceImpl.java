@@ -80,8 +80,8 @@ public class InsurancesInfoServiceImpl implements InsurancesInfoService {
 
 
     @Override
-    public ResponseData deleteInsurances(List<Long> ids) {
-        int delete = infoMapper.deleteBatchIds(ids);
+    public ResponseData deleteInsurances(SearchInsurancesDTO insurancesDTO) {
+        int delete = infoMapper.deleteBatchIds(insurancesDTO.getId());
         if (delete>0){
             return ResponseData.ok("删除成功");
         }

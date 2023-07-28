@@ -13,7 +13,8 @@ import java.util.List;
 * @description 针对表【t_insurance_summary(保险汇总)】的数据库操作Service
 * @createDate 2023-07-23 17:26:15
 */
-public interface InsuranceSummaryService extends IService<InsuranceSummary> {
+public interface InsuranceSummaryService  {
+
     void updateMonthlyCountAndTotalAmount(int prefecture, int month, int year, BigDecimal compensationAmount);
 
     ResponseData searchInsuranceSummary(SearchSummaryDTO summaryDTO);

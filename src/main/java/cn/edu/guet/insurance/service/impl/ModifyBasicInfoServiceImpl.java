@@ -1,4 +1,5 @@
 package cn.edu.guet.insurance.service.impl;
+
 import cn.edu.guet.insurance.bean.SearchModifyDTO;
 import cn.edu.guet.insurance.common.ResponseData;
 import cn.hutool.core.collection.CollectionUtil;
@@ -12,19 +13,52 @@ import cn.edu.guet.insurance.mapper.ModifyBasicInfoMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 /**
-* @author 14594
-* @description 针对表【modify_basic_info(modify_basic_info)】的数据库操作Service实现
-* @createDate 2023-07-23 21:50:29
-*/
+ * @author 14594
+ * @description 针对表【modify_basic_info(modify_basic_info)】的数据库操作Service实现
+ * @createDate 2023-07-23 21:50:29
+ */
 @Service
 public class ModifyBasicInfoServiceImpl extends ServiceImpl<ModifyBasicInfoMapper, ModifyBasicInfo>
-    implements ModifyBasicInfoService {
+        implements ModifyBasicInfoService {
 
     @Autowired
     ModifyBasicInfoMapper modifyBasicInfoMapper;
+
+    @Override
+    public ResponseData creatmodify(ModifyBasicInfo modifyBasicInfo) {
+        int insert = modifyBasicInfoMapper.insert(modifyBasicInfo);
+        System.out.println("ssssssss:" + insert);
+
+        if (insert > 0) {
+            return ResponseData.ok("保存成功");
+        } else {
+            return ResponseData.fail("保存失败");
+        }
+    }
+
+    @Override
+    public ResponseData deleteModify(SearchModifyDTO searchModifyDTO) {
+        int delete = modifyBasicInfoMapper.deleteBatchIds(searchModifyDTO.getDeleteId());
+        if (delete > 0) {
+            return ResponseData.ok("删除成功");
+        } else {
+            return ResponseData.fail("删除失败");
+        }
+    }
+
+    @Override
+    public ResponseData updateModify(ModifyBasicInfo modifyBasicInfo) {
+        int update = modifyBasicInfoMapper.updateById(modifyBasicInfo);
+        if (update > 0) {
+            return ResponseData.ok("更新成功");
+        } else {
+            return ResponseData.fail("更新失败");
+        }
+    }
 
     @Override
     public IPage searchModify(SearchModifyDTO searchModifyDTO) {
@@ -32,10 +66,10 @@ public class ModifyBasicInfoServiceImpl extends ServiceImpl<ModifyBasicInfoMappe
         page.setSize(searchModifyDTO.getPageSize());
         page.setCurrent(searchModifyDTO.getCurrentPage());
         QueryWrapper<ModifyBasicInfo> qw = new QueryWrapper();
-        if (searchModifyDTO.getPrefecture() != 0) {
+        if ((searchModifyDTO.getPrefecture() != null) && (searchModifyDTO.getPrefecture() != 0)) {
             qw.eq("prefecture", searchModifyDTO.getPrefecture());
         }
-        if (searchModifyDTO.getCounty() != 0) {
+        if ((searchModifyDTO.getCounty() != null) && (searchModifyDTO.getCounty() != 0)) {
             qw.eq("county", searchModifyDTO.getCounty());
         }
         if (!StringUtils.isBlank(searchModifyDTO.getModifyProjectName())) {
@@ -49,28 +83,6 @@ public class ModifyBasicInfoServiceImpl extends ServiceImpl<ModifyBasicInfoMappe
         return listResult;
     }
 
-    @Override
-    public ResponseData addChangeReform(ModifyBasicInfo modifyBasicInfo) {
-        int insert = modifyBasicInfoMapper.insert(modifyBasicInfo);
-        System.out.println("ssssssss:" + insert);
-
-        if (insert > 0) {
-            return ResponseData.ok("保存成功");
-        } else {
-            return ResponseData.fail("保存失败");
-        }
-    }
-
-    @Override
-    public ResponseData deleteModify(List<Integer> deleteId) {
-        int delete = modifyBasicInfoMapper.deleteBatchIds(deleteId);
-        if (delete>0){
-            return ResponseData.ok("删除成功");
-        }
-        else {
-            return ResponseData.fail("删除失败");
-        }
-    }
 }
 
 

@@ -32,26 +32,24 @@ public class InsurancesController {
         return infoService.createInsurances(insuranceList);
     }
 
+    @PostMapping("/deleteInsurances")
+    public ResponseData deleteInsurances(@RequestBody SearchInsurancesDTO insurancesDTO) {
+        return infoService.deleteInsurances(insurancesDTO);
+    }
+
+    @PostMapping("/updateInsurances")
+    public ResponseData updateInsurances(@RequestBody InsuranceList insuranceList) {
+        return infoService.updateInsurances(insuranceList);
+    }
+
     @PostMapping("/searchInsurances")
     public ResponseData searchInsurances(@RequestBody SearchInsurancesDTO insuranceDTO) {
         IPage searchModify = infoService.searchInsurances(insuranceDTO);
         return ResponseData.ok(searchModify);
     }
 
-    @PostMapping("/deleteInsurances")
-    public ResponseData deleteInsurances(@RequestParam("ids") List<Long> ids) {
-        return infoService.deleteInsurances(ids);
-    }
-
-    @PostMapping("/updateInsurances")
-    public ResponseData updateInsurances(@RequestBody InsuranceList insuranceList) {
-
-        return infoService.updateInsurances(insuranceList);
-
-    }
-
-    @Transactional
     //保险汇总
+    @Transactional
     @PostMapping("/searchInsuranceSummary")
     public ResponseData searchInsuranceSummary(@RequestBody SearchSummaryDTO summaryDTO) {
         int year = Integer.parseInt(summaryDTO.getCurrentYear());
