@@ -54,4 +54,5 @@ public class SearchInsurancesDTO extends Page {
 
     private List<String> overWorkTime;
 
+    private List<Integer> id;
 }

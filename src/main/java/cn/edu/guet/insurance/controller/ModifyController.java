@@ -22,10 +22,26 @@ public class ModifyController {
     @Autowired
     PrefectureCountyService prefectureCountyService;
 
+    @PostMapping("/creatmodify")
+    public ResponseData creatmodify(@RequestBody ModifyBasicInfo modifyBasicInfo) {
+        return modifyBasicInfoService.creatmodify(modifyBasicInfo);
+    }
+
+    @PostMapping("/deleteModify")
+    public ResponseData deleteModify(@RequestBody SearchModifyDTO searchModifyDTO) {
+        System.out.println(searchModifyDTO.getDeleteId().size());
+        return modifyBasicInfoService.deleteModify(searchModifyDTO);
+    }
+
+    @PostMapping("/updateModify")
+    public ResponseData updateModify(@RequestBody ModifyBasicInfo modifyBasicInfo) {
+        return modifyBasicInfoService.updateModify(modifyBasicInfo);
+    }
+
     @PostMapping("/searchModify")
     public ResponseData searchModify(@RequestBody SearchModifyDTO searchModifyDTO){
+        System.out.println(searchModifyDTO+"是：+++++++++");
         IPage searchModify = modifyBasicInfoService.searchModify(searchModifyDTO);
-        System.out.println("没有实力");
         return ResponseData.ok(searchModify);
     }
 
@@ -34,12 +50,6 @@ public class ModifyController {
         int prefecture=searchModifyDTO.getPrefecture();
         List<Integer> countyList=prefectureCountyService.getCountyByPrefecture(prefecture);
         return ResponseData.ok(countyList);
-    }
-
-    @PostMapping("/deleteModify")
-    public ResponseData deleteModify(@RequestBody SearchModifyDTO searchModifyDTO) {
-        System.out.println(searchModifyDTO.getDeleteId().size());
-        return modifyBasicInfoService.deleteModify(searchModifyDTO.getDeleteId());
     }
 
 }

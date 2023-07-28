@@ -16,11 +16,11 @@ public interface InsurancesInfoService {
 
     ResponseData createInsurances(InsuranceList insuranceList);
 
+    ResponseData deleteInsurances(SearchInsurancesDTO insurancesDTO);
+
+    ResponseData updateInsurances(InsuranceList insuranceList);
 
     IPage searchInsurances(SearchInsurancesDTO modifyDTO);
 
 
-    ResponseData deleteInsurances(List<Long> ids);
-
-    ResponseData updateInsurances(InsuranceList insuranceList);
 }

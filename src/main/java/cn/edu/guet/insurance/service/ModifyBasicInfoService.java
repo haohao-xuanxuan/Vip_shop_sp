@@ -16,11 +16,15 @@ import java.util.List;
 */
 public interface ModifyBasicInfoService extends IService<ModifyBasicInfo> {
 
-    IPage searchModify(SearchModifyDTO searchModifyDTO);
+    ResponseData creatmodify(ModifyBasicInfo modifyBasicInfo);
 
-    ResponseData addChangeReform(ModifyBasicInfo modifyBasicInfo);
+    ResponseData deleteModify(SearchModifyDTO searchModifyDTO);
 
-    ResponseData deleteModify(List<Integer> deleteId);
+    ResponseData updateModify(ModifyBasicInfo modifyBasicInfo);
+
+    IPage searchModify(SearchModifyDTO modifyDTO);
+
+
 }
 
 
