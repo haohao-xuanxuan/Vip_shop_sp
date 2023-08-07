@@ -1,4 +1,4 @@
-package cn.edu.guet.insurance.config;
+package cn.edu.guet.config;
 
 /**
  * @Author liwei

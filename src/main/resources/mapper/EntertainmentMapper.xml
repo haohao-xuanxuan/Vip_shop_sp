@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.EntertainmentMapper">
+
+    <resultMap id="BaseResultMap" type="cn.edu.guet.bean.Entertainment">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="src" column="src" jdbcType="VARCHAR"/>
+            <result property="titletwo" column="titletwo" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,title,src,
+        titletwo
+    </sql>
+</mapper>
