@@ -32,6 +32,12 @@ public class IndexGoods implements Serializable {
     @TableField(value = "title")
     private String title;
 
+    /**
+     * 
+     */
+    @TableField(value = "type")
+    private Integer type;
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

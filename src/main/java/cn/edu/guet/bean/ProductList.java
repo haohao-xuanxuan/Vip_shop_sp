@@ -54,13 +54,25 @@ public class ProductList implements Serializable {
      * 
      */
     @TableField(value = "priceOne")
-    private String priceone;
+    private Double priceone;
 
     /**
      * 
      */
     @TableField(value = "priceTwo")
-    private String pricetwo;
+    private Double pricetwo;
+
+    /**
+     * 
+     */
+    @TableField(value = "src2")
+    private String src2;
+
+    /**
+     * 
+     */
+    @TableField(value = "type")
+    private Integer type;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
