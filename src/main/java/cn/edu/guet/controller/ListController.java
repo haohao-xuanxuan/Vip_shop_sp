@@ -13,7 +13,7 @@ public class ListController {
     private ProductListService productListService;
 
     @GetMapping("/productList")
-    public ResponseData productList(){
+    public ResponseData productList() {
         return productListService.getProductList();
     }
 }

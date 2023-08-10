@@ -11,7 +11,6 @@ public class EntertainmentController {
     @Autowired
     private EntertainmentMapper entertainmentMapper;
 
-
     @GetMapping("/entertainmentList")
     public ResponseData entertainmentList() {
 
