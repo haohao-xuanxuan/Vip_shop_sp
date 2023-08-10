@@ -26,4 +26,5 @@ public class IndexController {
     public ResponseData getIndexShow(){
         return indexiShowService.getIndexShow();
     }
+
 }
